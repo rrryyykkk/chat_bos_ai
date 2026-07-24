@@ -1,0 +1,111 @@
+# =========================================
+# CORE — FastAPI & Server
+# =========================================
+fastapi==0.139.0            # Framework utama backend
+starlette==1.3.1            # "Mesin" di balik FastAPI (routing, middleware, request/response)
+uvicorn==0.51.0             # ASGI server buat menjalankan aplikasi FastAPI
+httptools==0.8.0            # Parser HTTP performa tinggi, dipakai internal uvicorn
+h11==0.16.0                 # Implementasi protokol HTTP/1.1 tingkat rendah, dipakai httpcore/uvicorn
+websockets==16.1            # Support koneksi WebSocket
+watchfiles==1.2.0           # Deteksi perubahan file buat auto-reload (--reload)
+fastapi-cli==0.0.29         # Command `fastapi dev` / `fastapi run`
+fastapi-cloud-cli==0.22.2   # CLI tambahan buat deploy ke FastAPI Cloud (opsional)
+fastar==0.11.0              # Dependency pendukung fastapi-cloud-cli
+
+# =========================================
+# VALIDASI DATA — Pydantic
+# =========================================
+pydantic==2.13.4            # Validasi & parsing data (request/response schema)
+pydantic_core==2.46.4       # Core engine Pydantic (ditulis di Rust, buat performa)
+pydantic-settings==2.14.2   # Load environment variables (.env) ke class config Python
+pydantic-extra-types==2.11.1 # Tipe data tambahan (phone number, currency, dll)
+annotated-types==0.7.0      # Support constraint tipe data via Annotated[...]
+annotated-doc==0.0.4        # Support dokumentasi tipe data via Annotated[...]
+typing-inspection==0.4.2    # Utility internal buat introspeksi type-hint
+typing_extensions==4.16.0   # Backport fitur typing Python versi baru
+email-validator==2.3.0      # Validasi format email (dipakai kalau field Pydantic EmailStr)
+
+# =========================================
+# DATABASE — PostgreSQL & Migration
+# =========================================
+SQLAlchemy==2.0.51          # ORM utama buat komunikasi ke database
+greenlet==3.5.3             # Dependency wajib SQLAlchemy versi async
+asyncpg==0.31.0             # Driver async buat konek ke PostgreSQL
+alembic==1.18.5             # Tool migration database (versioning perubahan schema tabel)
+Mako==1.3.12                # Template engine, dipakai Alembic buat generate file migration
+
+# =========================================
+# REDIS — Cache & Rate Limiting
+# =========================================
+redis==8.0.1                # Client buat konek ke Redis (cache & rate limit)
+
+# =========================================
+# AUTH & SECURITY — JWT, Hashing, OAuth
+# =========================================
+python-jose==3.5.0          # Generate & decode JWT (access_token & refresh_token)
+passlib==1.7.4               # Library hashing password (framework-nya)
+bcrypt==5.0.0                # Algoritma hashing yang dipakai passlib buat hash password
+cryptography==49.0.0         # Library kriptografi, dipakai python-jose buat signing JWT
+cffi==2.1.0                  # Binding C, dependency internal cryptography
+pycparser==3.0               # Parser C, dependency internal cffi
+ecdsa==0.19.2                # Algoritma tanda tangan digital, dipakai python-jose (opsional algorithm)
+pyasn1==0.6.4                # Encoding/decoding ASN.1, dependency ecdsa & rsa
+pyasn1_modules==0.4.2        # Modul tambahan pyasn1
+rsa==4.9.1                   # Algoritma RSA, dependency google-auth
+six==1.17.0                  # Utility kompatibilitas Python 2/3, dependency lama beberapa library
+
+# =========================================
+# AI PROVIDER — Google Gemini
+# =========================================
+google-genai==2.14.0        # SDK resmi buat call Gemini API
+google-auth==2.56.2         # Autentikasi ke layanan Google, dipakai google-genai
+
+# =========================================
+# HTTP CLIENT & NETWORKING
+# =========================================
+httpx==0.28.1                # HTTP client (buat call API luar, misal Google OAuth)
+httpcore==1.0.9              # Layer transport di bawah httpx
+requests==2.34.2             # HTTP client sinkron (dependency beberapa library lain, misal google-auth)
+anyio==4.14.2                 # Abstraksi async (biar kode async jalan di asyncio maupun trio)
+sniffio==1.3.1                # Deteksi async library yang sedang jalan (asyncio/trio), dependency anyio
+certifi==2026.6.17            # Sertifikat SSL/TLS buat request HTTPS
+charset-normalizer==3.4.9     # Deteksi encoding karakter, dependency requests
+idna==3.18                    # Encoding domain internasional, dependency networking
+urllib3==2.7.0                # HTTP client tingkat rendah, dependency requests
+dnspython==2.8.0              # Resolusi DNS, dependency email-validator
+distro==1.9.0                 # Deteksi distro Linux, dependency beberapa SDK (termasuk google-genai)
+tenacity==9.1.4               # Retry logic dengan backoff — berguna buat retry call Gemini API
+
+# =========================================
+# LINTING & FORMATTING
+# =========================================
+ruff==0.16.0                  # Linter & formatter kode Python (cek kualitas kode, rapiin import/style)
+
+# =========================================
+# CLI / TERMINAL OUTPUT
+# =========================================
+click==8.4.2                  # Framework bikin command-line interface
+typer==0.26.8                 # Wrapper di atas click, dipakai fastapi-cli
+rich==15.0.0                  # Bikin output terminal jadi berwarna/rapi
+rich-toolkit==0.20.3          # Tambahan komponen UI buat rich
+Pygments==2.20.0               # Syntax highlighting di terminal
+markdown-it-py==4.2.0          # Parser markdown, dipakai rich buat render markdown
+mdurl==0.1.2                   # Dependency markdown-it-py buat parsing URL
+shellingham==1.5.4             # Deteksi shell yang dipakai (bash, zsh, dll)
+colorama==0.4.6                # Support warna di terminal Windows
+
+# =========================================
+# CONFIG & FILE HANDLING
+# =========================================
+python-dotenv==1.2.2          # Load file .env
+python-multipart==0.0.32       # Parsing form-data / file upload
+PyYAML==6.0.3                  # Parsing file YAML (dependency beberapa tools)
+Jinja2==3.1.6                  # Template engine (misal buat render HTML error page)
+MarkupSafe==3.0.3              # Escaping string aman buat Jinja2
+
+# =========================================
+# MONITORING & MISC
+# =========================================
+sentry-sdk==2.65.0             # Error tracking/monitoring (opsional, dipasang belakangan)
+rignore==0.7.6                 # Dependency internal tooling (bukan dipakai langsung di kode)
+detect-installer==0.1.0        # Deteksi cara Python di-install (dependency internal)

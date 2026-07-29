@@ -7,7 +7,7 @@ from sqlalchemy.orm import (
     DeclarativeBase,
 )  # class dasar yang di-inherit semua model tabel (User, dll)
 
-from config import settings  # object berisi semua env variable dari .env
+from app.config.setting import settings  # object berisi semua env variable dari .env
 
 
 # -- Base Class --
